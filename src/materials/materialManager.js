@@ -1,14 +1,34 @@
-// materials/materialManager.js
-// Material creation and management
+/*//////////////////////////////////////////////////////////////
+                    MATERIAL MANAGER
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @title Material Manager
+ * @author ATrnd
+ * @notice Manages creation and application of materials for 3D objects
+ * @dev Handles material caching, creation, and application based on ownership status
+ */
 
 import * as THREE from 'three';
 import { MATERIALS } from '../config/settings.js';
 
-// Create a cache for materials to avoid duplicates
-const materialCache = new Map();
+/*//////////////////////////////////////////////////////////////
+                    STATE VARIABLES
+//////////////////////////////////////////////////////////////*/
 
 /**
- * Create unowned material for wireframe display
+ * @notice Cache for storing created materials
+ * @dev Reduces redundant material creation by storing references to existing materials
+ */
+const materialCache = new Map();
+
+/*//////////////////////////////////////////////////////////////
+                    MATERIAL CREATION
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @notice Create unowned material for wireframe display
+ * @dev Generates a standardized material for visualizing unowned building parts
  * @returns {THREE.Material} Wireframe material for unowned parts
  */
 export function createUnownedMaterial() {
@@ -33,8 +53,13 @@ export function createUnownedMaterial() {
   return materialCache.get('unowned').clone();
 }
 
+/*//////////////////////////////////////////////////////////////
+                    MATERIAL APPLICATION
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Apply materials to a mesh based on ownership
+ * @notice Apply materials to a mesh based on ownership
+ * @dev Traverses an object hierarchy and applies the appropriate materials based on ownership status
  * @param {THREE.Object3D} object - The object to apply materials to
  * @param {boolean} isOwned - Whether this part is owned
  * @returns {THREE.Object3D} The object with applied materials
@@ -73,10 +98,14 @@ export function applyMaterials(object, isOwned) {
   return object;
 }
 
+/*//////////////////////////////////////////////////////////////
+                    CACHE MANAGEMENT
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Clear the material cache to free memory
+ * @notice Clear the material cache to free memory
+ * @dev Used during cleanup or when materials need to be regenerated
  */
 export function clearMaterialCache() {
   materialCache.clear();
 }
-

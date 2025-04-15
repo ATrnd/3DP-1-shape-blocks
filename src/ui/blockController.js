@@ -1,14 +1,34 @@
-// ui/blockController.js
-// Block ownership control UI component
+/*//////////////////////////////////////////////////////////////
+                    BLOCK CONTROLLER
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @title Block Controller
+ * @author ATrnd
+ * @notice UI component for controlling block ownership
+ * @dev Creates and manages interactive toggles for ownership visualization
+ */
 
 import { BLOCK_OWNERSHIP } from '../config/settings.js';
 import { updateBlockOwnership } from '../building/buildingManager.js';
 
-// Reference to the block controller container
-let controllerContainer;
+/*//////////////////////////////////////////////////////////////
+                        STATE VARIABLES
+//////////////////////////////////////////////////////////////*/
 
 /**
- * Create the block ownership controller UI
+ * @notice Reference to the controller container element
+ * @dev DOM element containing the ownership controls
+ */
+let controllerContainer;
+
+/*//////////////////////////////////////////////////////////////
+                        UI CREATION
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @notice Create the block ownership controller UI
+ * @dev Builds DOM elements for the ownership toggle interface
  * @returns {HTMLElement} The created block controller
  */
 export function createBlockController() {
@@ -137,22 +157,26 @@ export function createBlockController() {
       updateBlockOwnership(blockKey, isOwned);
     });
 
-      // Add click handler to the toggle container
-      toggleContainer.addEventListener('click', () => {
-          // Toggle the checkbox state
-          input.checked = !input.checked;
+    // Add click handler to the toggle container
+    toggleContainer.addEventListener('click', () => {
+      // Toggle the checkbox state
+      input.checked = !input.checked;
 
-          // Update visuals manually
-          const isOwned = input.checked;
-          slider.style.backgroundColor = isOwned ? '#4CAF50' : '#ccc';
-          knob.style.left = isOwned ? '22px' : '2px';
+      // Update visuals manually
+      const isOwned = input.checked;
+      slider.style.backgroundColor = isOwned ? '#4CAF50' : '#ccc';
+      knob.style.left = isOwned ? '22px' : '2px';
 
-          // Update the ownership
-          updateBlockOwnership(blockKey, isOwned);
-      });
+      // Update the ownership
+      updateBlockOwnership(blockKey, isOwned);
+    });
 
     controllerContainer.appendChild(row);
   });
+
+  /*//////////////////////////////////////////////////////////////
+                        TOGGLE ALL BUTTON
+  //////////////////////////////////////////////////////////////*/
 
   // Add "Toggle All" button
   const toggleAllRow = document.createElement('div');
@@ -217,18 +241,27 @@ export function createBlockController() {
   return controllerContainer;
 }
 
+/*//////////////////////////////////////////////////////////////
+                        INITIALIZATION
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Initialize the block controller
+ * @notice Initialize the block controller
+ * @dev Creates and adds the controller to the DOM
  */
 export function initBlockController() {
   createBlockController();
 }
 
+/*//////////////////////////////////////////////////////////////
+                        ACCESSOR FUNCTIONS
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Get the block controller element
+ * @notice Get the block controller element
+ * @dev Provides access to the controller DOM element
  * @returns {HTMLElement} The block controller container
  */
 export function getBlockController() {
   return controllerContainer;
 }
-

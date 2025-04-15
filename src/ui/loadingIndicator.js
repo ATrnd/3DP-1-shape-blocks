@@ -1,11 +1,31 @@
-// ui/loadingIndicator.js
-// Loading indicator for model loading
-
-// Reference to the loading element
-let loadingElement;
+/*//////////////////////////////////////////////////////////////
+                    LOADING INDICATOR
+//////////////////////////////////////////////////////////////*/
 
 /**
- * Create the loading indicator
+ * @title Loading Indicator
+ * @author ATrnd
+ * @notice UI component for displaying loading state during model loading
+ * @dev Manages the creation, display, and progress updates for the loading overlay
+ */
+
+/*//////////////////////////////////////////////////////////////
+                    STATE VARIABLES
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @notice Reference to the loading element
+ * @dev DOM element containing the loading indicator UI
+ */
+let loadingElement;
+
+/*//////////////////////////////////////////////////////////////
+                    UI CREATION
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @notice Create the loading indicator
+ * @dev Lazily initializes the loading indicator DOM element
  * @returns {HTMLElement} The created loading indicator
  */
 export function createLoadingIndicator() {
@@ -30,8 +50,13 @@ export function createLoadingIndicator() {
   return loadingElement;
 }
 
+/*//////////////////////////////////////////////////////////////
+                    VISIBILITY MANAGEMENT
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Show the loading indicator
+ * @notice Show the loading indicator
+ * @dev Creates the indicator if needed and makes it visible
  */
 export function showLoadingIndicator() {
   // Create if it doesn't exist
@@ -47,7 +72,8 @@ export function showLoadingIndicator() {
 }
 
 /**
- * Hide the loading indicator
+ * @notice Hide the loading indicator
+ * @dev Either hides immediately or shows error state before hiding
  * @param {boolean} [isError=false] - Whether there was an error
  * @param {string} [errorMessage=''] - Error message to display
  */
@@ -73,8 +99,13 @@ export function hideLoadingIndicator(isError = false, errorMessage = '') {
   }
 }
 
+/*//////////////////////////////////////////////////////////////
+                    PROGRESS TRACKING
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Update the loading progress display
+ * @notice Update the loading progress display
+ * @dev Updates the progress percentage text in the loading indicator
  * @param {number} progress - Progress percentage (0-100)
  */
 export function updateLoadingProgress(progress) {
@@ -88,11 +119,15 @@ export function updateLoadingProgress(progress) {
   }
 }
 
+/*//////////////////////////////////////////////////////////////
+                    ACCESSOR FUNCTIONS
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Get the loading indicator element
+ * @notice Get the loading indicator element
+ * @dev Provides access to the loading indicator DOM element
  * @returns {HTMLElement} The loading indicator element
  */
 export function getLoadingIndicator() {
   return loadingElement;
 }
-

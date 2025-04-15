@@ -1,19 +1,50 @@
-// building/buildingManager.js
-// Building construction and management
+/*//////////////////////////////////////////////////////////////
+                    BUILDING MANAGER
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @title Building Manager
+ * @author ATrnd
+ * @notice Manages the construction and visualization of 3D building components
+ * @dev Controls the creation, positioning, and material application of building elements
+ *      based on ownership status
+ */
 
 import * as THREE from 'three';
 import { BUILDING_CONFIG, BLOCK_OWNERSHIP } from '../config/settings.js';
 import { applyMaterials, createUnownedMaterial } from '../materials/materialManager.js';
 import { getScene } from '../core/scene.js';
 
-// Reference to the current building
-let building;
-let originalModel;
-let boxHelper;
+/*//////////////////////////////////////////////////////////////
+                        STATE VARIABLES
+//////////////////////////////////////////////////////////////*/
 
 /**
- * Create block groups for organizing the building
- * @returns {Object} Map of block groups
+ * @notice Reference to the current building
+ * @dev THREE.Group containing all block groups and floors
+ */
+let building;
+
+/**
+ * @notice Reference to the original model
+ * @dev Stored to create consistent floor clones
+ */
+let originalModel;
+
+/**
+ * @notice Reference to the bounding box helper
+ * @dev Visual aid that shows the building's boundaries
+ */
+let boxHelper;
+
+/*//////////////////////////////////////////////////////////////
+                     BUILDING CONSTRUCTION
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @notice Create block groups for organizing the building
+ * @dev Creates a hierarchical structure of THREE.Groups with named blocks
+ * @returns {Object} Map of block groups indexed by block_id
  */
 function createBlockGroups() {
   // Create a group to hold the entire building
@@ -38,7 +69,8 @@ function createBlockGroups() {
 }
 
 /**
- * Create and position a floor
+ * @notice Create and position a floor
+ * @dev Clones the original model and positions it based on floor index
  * @param {THREE.Object3D} model - The model to use for this floor
  * @param {number} floorIndex - The floor number (0-based)
  * @param {THREE.Vector3} center - The center point of the model
@@ -58,7 +90,8 @@ function createFloor(model, floorIndex, center, modelHeight) {
 }
 
 /**
- * Construct the building from the loaded model
+ * @notice Construct the building from the loaded model
+ * @dev Creates the full building structure with organized blocks and floors
  * @param {THREE.Object3D} model - The loaded base model
  * @returns {THREE.Object3D} The constructed building
  */
@@ -100,8 +133,13 @@ export function constructBuilding(model) {
   return building;
 }
 
+/*//////////////////////////////////////////////////////////////
+                        SCENE MANAGEMENT
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Add the building to the scene with bounding box helper
+ * @notice Add the building to the scene with bounding box helper
+ * @dev Adds both the building group and a visual bounding box to the scene
  */
 export function addBuildingToScene() {
   const scene = getScene();
@@ -115,7 +153,8 @@ export function addBuildingToScene() {
 }
 
 /**
- * Remove the building from the scene including bounding box helper
+ * @notice Remove the building from the scene including bounding box helper
+ * @dev Cleans up all building-related objects from the scene
  */
 export function removeBuildingFromScene() {
   const scene = getScene();
@@ -129,8 +168,13 @@ export function removeBuildingFromScene() {
   }
 }
 
+/*//////////////////////////////////////////////////////////////
+                        ACCESSOR FUNCTIONS
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Get the current building
+ * @notice Get the current building
+ * @dev Provides access to the main building group
  * @returns {THREE.Group} The building group
  */
 export function getBuilding() {
@@ -138,15 +182,21 @@ export function getBuilding() {
 }
 
 /**
- * Get the original model
+ * @notice Get the original model
+ * @dev Provides access to the original model for cloning or reference
  * @returns {THREE.Object3D} The original model
  */
 export function getOriginalModel() {
   return originalModel;
 }
 
+/*//////////////////////////////////////////////////////////////
+                    OWNERSHIP MANAGEMENT
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Update the ownership status of a block
+ * @notice Update the ownership status of a block
+ * @dev Changes material properties of all meshes in a block based on ownership
  * @param {string} blockKey - The block key (e.g., 'block_1')
  * @param {boolean} isOwned - The new ownership status
  */
@@ -196,4 +246,3 @@ export function updateBlockOwnership(blockKey, isOwned) {
     console.warn('Building not created yet, ownership will be applied when it is constructed');
   }
 }
-

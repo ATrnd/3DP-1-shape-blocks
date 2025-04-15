@@ -1,5 +1,13 @@
-// index.js
-// Main entry point for the application
+/*//////////////////////////////////////////////////////////////
+                    APPLICATION ENTRY POINT
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @title Shape Blocks Application
+ * @author ATrnd
+ * @notice Main entry point and initialization for the 3D visualization application
+ * @dev Coordinates startup sequence and module initialization
+ */
 
 import './style.css';
 
@@ -20,8 +28,19 @@ import { initBlockController } from './ui/blockController.js';
 import { selectModel } from './models/modelManager.js';
 import { DEFAULT_MODEL_INDEX } from './models/modelRegistry.js';
 
+/*//////////////////////////////////////////////////////////////
+                    APPLICATION INITIALIZATION
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Initialize the application
+ * @notice Initialize the application
+ * @dev Handles the complete startup sequence in the correct dependency order:
+ *      1. Scene initialization
+ *      2. Performance monitoring
+ *      3. User controls
+ *      4. UI components
+ *      5. Initial model loading
+ *      6. Animation loop start
  */
 function initApp() {
   console.log('Initializing application...');
@@ -60,6 +79,12 @@ function initApp() {
   console.log('Application initialized successfully!');
 }
 
-// Start the application when the DOM is ready
-document.addEventListener('DOMContentLoaded', initApp);
+/*//////////////////////////////////////////////////////////////
+                    STARTUP SEQUENCE
+//////////////////////////////////////////////////////////////*/
 
+/**
+ * @notice Start the application when the DOM is ready
+ * @dev Entry point for the application
+ */
+document.addEventListener('DOMContentLoaded', initApp);

@@ -1,13 +1,33 @@
-// ui/modelSelector.js
-// Model selection UI component
+/*//////////////////////////////////////////////////////////////
+                        MODEL SELECTOR
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @title Model Selector
+ * @author ATrnd
+ * @notice UI component for selecting different 3D models
+ * @dev Creates and manages interactive model selection interface
+ */
 
 import { getAvailableModels, getCurrentModelIndex, selectModel } from '../models/modelManager.js';
 
-// Reference to the selector container
-let selectorContainer;
+/*//////////////////////////////////////////////////////////////
+                        STATE VARIABLES
+//////////////////////////////////////////////////////////////*/
 
 /**
- * Create the model selector UI
+ * @notice Reference to the selector container element
+ * @dev DOM element containing the model selection UI
+ */
+let selectorContainer;
+
+/*//////////////////////////////////////////////////////////////
+                        UI CREATION
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @notice Create the model selector UI
+ * @dev Builds DOM elements for the model selection interface
  * @returns {HTMLElement} The created model selector
  */
 export function createModelSelector() {
@@ -90,8 +110,13 @@ export function createModelSelector() {
   return selectorContainer;
 }
 
+/*//////////////////////////////////////////////////////////////
+                        UI UPDATES
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Update the visual state of model selector buttons
+ * @notice Update the visual state of model selector buttons
+ * @dev Refreshes button styles to reflect the currently selected model
  */
 export function updateButtonStyles() {
   const currentIndex = getCurrentModelIndex();
@@ -104,18 +129,27 @@ export function updateButtonStyles() {
   }
 }
 
+/*//////////////////////////////////////////////////////////////
+                        INITIALIZATION
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Initialize the model selector
+ * @notice Initialize the model selector
+ * @dev Creates and adds the selector to the DOM
  */
 export function initModelSelector() {
   createModelSelector();
 }
 
+/*//////////////////////////////////////////////////////////////
+                        ACCESSOR FUNCTIONS
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Get the model selector element
+ * @notice Get the model selector element
+ * @dev Provides access to the selector DOM element
  * @returns {HTMLElement} The model selector container
  */
 export function getModelSelector() {
   return selectorContainer;
 }
-

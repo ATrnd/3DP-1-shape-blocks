@@ -1,17 +1,47 @@
-// utils/performance.js
-// Performance monitoring utilities
+/*//////////////////////////////////////////////////////////////
+                    PERFORMANCE MONITORING
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @title Performance Monitoring Utilities
+ * @author ATrnd
+ * @notice Provides tools for monitoring and displaying performance metrics
+ * @dev Implements FPS counter, triangle counter, and frame timing measurements
+ */
 
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { PERFORMANCE } from '../config/settings.js';
 import { getBuilding } from '../building/buildingManager.js';
 
-// Performance monitoring variables
-let stats;
-let triangleCount = 0;
-let triangleCountDisplay;
+/*//////////////////////////////////////////////////////////////
+                        STATE VARIABLES
+//////////////////////////////////////////////////////////////*/
 
 /**
- * Initialize the Stats.js FPS monitor
+ * @notice Stats.js instance for FPS monitoring
+ * @dev Provides real-time performance monitoring via Stats.js
+ */
+let stats;
+
+/**
+ * @notice Current triangle count in the scene
+ * @dev Tracks the number of triangles in the current building model
+ */
+let triangleCount = 0;
+
+/**
+ * @notice DOM element for triangle count display
+ * @dev Container showing the current triangle count
+ */
+let triangleCountDisplay;
+
+/*//////////////////////////////////////////////////////////////
+                        FPS MONITORING
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @notice Initialize the Stats.js FPS monitor
+ * @dev Creates and configures the Stats.js instance for performance tracking
  */
 export function initFPSMonitor() {
   // Create Stats.js instance
@@ -27,8 +57,13 @@ export function initFPSMonitor() {
   document.body.appendChild(stats.dom);
 }
 
+/*//////////////////////////////////////////////////////////////
+                    TRIANGLE COUNT MONITORING
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Create the triangle count display
+ * @notice Create the triangle count display
+ * @dev Builds DOM element for showing triangle count
  */
 export function createTriangleCountDisplay() {
   // Create a container for the triangle count
@@ -51,7 +86,8 @@ export function createTriangleCountDisplay() {
 }
 
 /**
- * Count the number of triangles in a 3D object
+ * @notice Count the number of triangles in a 3D object
+ * @dev Traverses object hierarchy to calculate total triangle count
  * @param {THREE.Object3D} object - The object to count triangles in
  * @returns {number} The triangle count
  */
@@ -74,7 +110,8 @@ export function countTriangles(object) {
 }
 
 /**
- * Update the triangle count display
+ * @notice Update the triangle count display
+ * @dev Recounts triangles in the current building and updates display
  */
 export function updateTriangleCount() {
   const building = getBuilding();
@@ -90,8 +127,13 @@ export function updateTriangleCount() {
   }
 }
 
+/*//////////////////////////////////////////////////////////////
+                    FRAME TIMING MEASUREMENT
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Begin performance measurement for the current frame
+ * @notice Begin performance measurement for the current frame
+ * @dev Called at the start of each frame in the animation loop
  */
 export function beginPerformanceMeasurement() {
   if (stats) {
@@ -100,7 +142,8 @@ export function beginPerformanceMeasurement() {
 }
 
 /**
- * End performance measurement for the current frame
+ * @notice End performance measurement for the current frame
+ * @dev Called at the end of each frame in the animation loop
  */
 export function endPerformanceMeasurement() {
   if (stats) {
@@ -108,16 +151,26 @@ export function endPerformanceMeasurement() {
   }
 }
 
+/*//////////////////////////////////////////////////////////////
+                        INITIALIZATION
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Initialize all performance monitoring
+ * @notice Initialize all performance monitoring
+ * @dev Sets up both FPS and triangle count monitoring
  */
 export function initPerformanceMonitoring() {
   initFPSMonitor();
   createTriangleCountDisplay();
 }
 
+/*//////////////////////////////////////////////////////////////
+                        ACCESSOR FUNCTIONS
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Get the current stats instance
+ * @notice Get the current stats instance
+ * @dev Provides access to the Stats.js instance
  * @returns {Stats} Stats.js instance
  */
 export function getStats() {
@@ -125,10 +178,10 @@ export function getStats() {
 }
 
 /**
- * Get the current triangle count
+ * @notice Get the current triangle count
+ * @dev Returns the cached triangle count
  * @returns {number} Triangle count
  */
 export function getTriangleCount() {
   return triangleCount;
 }
-

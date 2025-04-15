@@ -1,5 +1,13 @@
-// models/modelManager.js
-// Model loading and switching functionality
+/*//////////////////////////////////////////////////////////////
+                        MODEL MANAGER
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @title Model Manager
+ * @author ATrnd
+ * @notice Manages 3D model loading, selection, and state tracking
+ * @dev Provides a central interface for loading models and tracking the currently selected model
+ */
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MODELS, DEFAULT_MODEL_INDEX } from './modelRegistry.js';
@@ -8,11 +16,23 @@ import { getCamera, getControls } from '../core/scene.js';
 import { updateTriangleCount } from '../utils/performance.js';
 import { hideLoadingIndicator, showLoadingIndicator, updateLoadingProgress } from '../ui/loadingIndicator.js';
 
-// Track current model
-let currentModelIndex = DEFAULT_MODEL_INDEX;
+/*//////////////////////////////////////////////////////////////
+                        STATE VARIABLES
+//////////////////////////////////////////////////////////////*/
 
 /**
- * Load a 3D model by index
+ * @notice Current model index in the MODELS array
+ * @dev Tracks which model is currently being displayed
+ */
+let currentModelIndex = DEFAULT_MODEL_INDEX;
+
+/*//////////////////////////////////////////////////////////////
+                        MODEL LOADING
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @notice Load a 3D model by index
+ * @dev Handles the complete model loading process including UI state and scene updates
  * @param {number} modelIndex - Index of the model in the MODELS array
  * @returns {Promise} Promise that resolves when model is loaded
  */
@@ -80,8 +100,13 @@ export function loadModel(modelIndex) {
   });
 }
 
+/*//////////////////////////////////////////////////////////////
+                        ACCESSOR FUNCTIONS
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Get the currently selected model index
+ * @notice Get the currently selected model index
+ * @dev Provides access to the current model state
  * @returns {number} Current model index
  */
 export function getCurrentModelIndex() {
@@ -89,15 +114,21 @@ export function getCurrentModelIndex() {
 }
 
 /**
- * Get the list of available models
+ * @notice Get the list of available models
+ * @dev Returns the complete model registry
  * @returns {Array} Array of model objects
  */
 export function getAvailableModels() {
   return MODELS;
 }
 
+/*//////////////////////////////////////////////////////////////
+                        MODEL SELECTION
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Select and load a model by index
+ * @notice Select and load a model by index
+ * @dev Public wrapper for loadModel with error handling
  * @param {number} modelIndex - Index of the model to load
  */
 export function selectModel(modelIndex) {
@@ -105,4 +136,3 @@ export function selectModel(modelIndex) {
     console.error('Failed to load model:', error);
   });
 }
-

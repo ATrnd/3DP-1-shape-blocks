@@ -1,16 +1,47 @@
-// core/animation.js
-// Animation loop management
+/*//////////////////////////////////////////////////////////////
+                        ANIMATION LOOP
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @title Animation Loop Manager
+ * @author ATrnd
+ * @notice Manages the main rendering and animation loop
+ * @dev Controls frame timing, performance monitoring, and scene updates
+ */
 
 import { getRenderer, getScene, getCamera, getControls } from './scene.js';
 import { beginPerformanceMeasurement, endPerformanceMeasurement } from '../utils/performance.js';
 import { updateAutoRotation } from '../utils/controls.js';
 
-// Animation state
-let isAnimating = false;
-let animationFrameId = null;
+/*//////////////////////////////////////////////////////////////
+                        STATE VARIABLES
+//////////////////////////////////////////////////////////////*/
 
 /**
- * Main animation loop
+ * @notice Flag indicating if animation is currently running
+ * @dev Used to prevent multiple animation loops from starting
+ */
+let isAnimating = false;
+
+/**
+ * @notice ID returned by requestAnimationFrame
+ * @dev Used to cancel animation when needed
+ */
+let animationFrameId = null;
+
+/*//////////////////////////////////////////////////////////////
+                    ANIMATION CORE FUNCTIONS
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @notice Main animation loop
+ * @dev Executed once per frame, handles updates and rendering
+ *      Order of operations:
+ *      1. Request next frame
+ *      2. Begin performance measurement
+ *      3. Update scene elements (rotation, controls)
+ *      4. Render the scene
+ *      5. End performance measurement
  */
 function animate() {
   // Request next frame first to ensure smoother animation
@@ -41,8 +72,13 @@ function animate() {
   endPerformanceMeasurement();
 }
 
+/*//////////////////////////////////////////////////////////////
+                    ANIMATION CONTROL FUNCTIONS
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Start the animation loop
+ * @notice Start the animation loop
+ * @dev Prevents multiple animation loops by checking if one is already running
  */
 export function startAnimation() {
   if (!isAnimating) {
@@ -52,7 +88,8 @@ export function startAnimation() {
 }
 
 /**
- * Stop the animation loop
+ * @notice Stop the animation loop
+ * @dev Cancels the animation frame request and updates state
  */
 export function stopAnimation() {
   if (isAnimating && animationFrameId !== null) {
@@ -63,10 +100,10 @@ export function stopAnimation() {
 }
 
 /**
- * Check if animation is currently running
+ * @notice Check if animation is currently running
+ * @dev Used to determine animation state for UI and other components
  * @returns {boolean} Animation state
  */
 export function isAnimationRunning() {
   return isAnimating;
 }
-

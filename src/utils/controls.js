@@ -1,16 +1,41 @@
-// utils/controls.js
-// User controls and interaction handling
+/*//////////////////////////////////////////////////////////////
+                        USER CONTROLS
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @title User Controls Manager
+ * @author ATrnd
+ * @notice Manages user interactions and camera controls
+ * @dev Handles auto-rotation, keyboard inputs, and orbit control interactions
+ */
 
 import * as THREE from 'three';
 import { AUTOROTATION } from '../config/settings.js';
 import { getCamera, getControls } from '../core/scene.js';
 
-// Auto-rotation state
-let isAutoRotating = AUTOROTATION.enabled;
-const autoRotateSpeed = AUTOROTATION.speed; // Degrees per frame
+/*//////////////////////////////////////////////////////////////
+                        STATE VARIABLES
+//////////////////////////////////////////////////////////////*/
 
 /**
- * Initialize all controls and event listeners
+ * @notice Flag indicating if auto-rotation is currently enabled
+ * @dev Controls whether the camera automatically rotates around the target
+ */
+let isAutoRotating = AUTOROTATION.enabled;
+
+/**
+ * @notice Speed of auto-rotation in degrees per frame
+ * @dev Constant value defining rotation speed
+ */
+const autoRotateSpeed = AUTOROTATION.speed; // Degrees per frame
+
+/*//////////////////////////////////////////////////////////////
+                        INITIALIZATION
+//////////////////////////////////////////////////////////////*/
+
+/**
+ * @notice Initialize all controls and event listeners
+ * @dev Sets up orbit controls interaction handlers and keyboard listeners
  */
 export function initControls() {
   // Get the controls instance
@@ -25,8 +50,13 @@ export function initControls() {
   window.addEventListener('keydown', handleKeyPress);
 }
 
+/*//////////////////////////////////////////////////////////////
+                        EVENT HANDLERS
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Handle keyboard input
+ * @notice Handle keyboard input
+ * @dev Processes key presses for control actions
  * @param {KeyboardEvent} event - Keyboard event
  */
 function handleKeyPress(event) {
@@ -37,7 +67,8 @@ function handleKeyPress(event) {
 }
 
 /**
- * Disable auto-rotation when user interacts with controls
+ * @notice Disable auto-rotation when user interacts with controls
+ * @dev Called when user starts manipulating the orbit controls
  */
 function disableAutoRotationOnInteraction() {
   if (isAutoRotating) {
@@ -46,8 +77,13 @@ function disableAutoRotationOnInteraction() {
   }
 }
 
+/*//////////////////////////////////////////////////////////////
+                    AUTO-ROTATION MANAGEMENT
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Toggle auto-rotation on/off
+ * @notice Toggle auto-rotation on/off
+ * @dev Switches between enabled and disabled states for auto-rotation
  */
 export function toggleAutoRotation() {
   isAutoRotating = !isAutoRotating;
@@ -55,7 +91,8 @@ export function toggleAutoRotation() {
 }
 
 /**
- * Update the auto-rotation for the current frame
+ * @notice Update the auto-rotation for the current frame
+ * @dev Rotates the camera position around the target when auto-rotation is enabled
  */
 export function updateAutoRotation() {
   // Only rotate if auto-rotation is enabled
@@ -85,8 +122,13 @@ export function updateAutoRotation() {
   camera.lookAt(controls.target);
 }
 
+/*//////////////////////////////////////////////////////////////
+                        ACCESSOR FUNCTIONS
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Check if auto-rotation is currently enabled
+ * @notice Check if auto-rotation is currently enabled
+ * @dev Returns the current state of auto-rotation
  * @returns {boolean} Auto-rotation state
  */
 export function isAutoRotationEnabled() {
@@ -94,15 +136,22 @@ export function isAutoRotationEnabled() {
 }
 
 /**
- * Get the auto-rotation speed
+ * @notice Get the auto-rotation speed
+ * @dev Returns the constant rotation speed in degrees per frame
  * @returns {number} Speed in degrees per frame
  */
 export function getAutoRotationSpeed() {
   return autoRotateSpeed;
 }
 
+/*//////////////////////////////////////////////////////////////
+                        UI ELEMENTS
+//////////////////////////////////////////////////////////////*/
+
 /**
- * Add a visual UI toggle button for rotation (optional)
+ * @notice Add a visual UI toggle button for rotation (optional)
+ * @dev Creates and adds a button element to toggle rotation
+ * @returns {HTMLElement} The created button element
  */
 export function addRotationToggle() {
   const button = document.createElement('button');
@@ -116,4 +165,3 @@ export function addRotationToggle() {
 
   return button;
 }
-
