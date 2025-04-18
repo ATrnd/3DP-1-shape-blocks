@@ -232,5 +232,5 @@ The Shape Blocks system will automatically add the new model to the selection in
 
 ## Maintainers
 
-- **Author:** [ATrnd]
+- **Author:** [[ATrnd](https://github.com/ATrnd/)]
 - **Contact:** [https://t.me/at_rnd]
