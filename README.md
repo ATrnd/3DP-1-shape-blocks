@@ -1,5 +1,7 @@
 # 3DP-1: Shape Blocks
 
+![shape_blocks](https://github.com/ATrnd/3DP-1-shape-blocks/blob/main/img/3DP-1-shape-blocks-0.1.jpg)
+
 ### Status: Draft
 
 ## 3DP Purpose
