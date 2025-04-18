@@ -11,7 +11,7 @@ Like EIPs, this 3DP aims to document technical specifications and standards in a
 
 ## Summary
 3DP-1 defines a standardized implementation for 3D visualization of NFT ownership states.
-The system renders building blocks that directly correspond to the four collectible fragments defined in [SIP-1](https://shape.network/), with clear distinction between owned and unowned components.
+The system renders building blocks that directly correspond to the four collectible fragments defined in [SIP-1](https://github.com/ATrnd/SIP-1-shape-fragments), with clear distinction between owned and unowned components.
 Owned fragments appear with full textures and materials, while unowned fragments display as wireframes, visually tracking collection progress.
 When fragments are burned and fused in the underlying SIP-1 system, users can own a complete building in the 3D environment.
 This technical standard implements rendering-specific functionality including model loading, material switching, ownership representation, and camera controls, enabling developers to build engaging 3D interfaces for NFT collections without reimplementing core graphics logic.
