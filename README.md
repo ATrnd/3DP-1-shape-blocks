@@ -183,10 +183,10 @@ These features combine to create a development environment optimized for both te
 
 ```bash
 # Clone the repository
-git clone git@github.com:ATrnd/3dp-1-shape-blocks.git
+git clone git@github.com:ATrnd/3DP-1-shape-blocks.git
 
 # Change to project directory
-cd 3dp-1-shape-blocks
+cd 3DP-1-shape-blocks
 
 # Install dependencies
 npm install
